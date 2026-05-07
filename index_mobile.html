@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V.I.S.T.O | Tutorial Mobile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap');
+
+        body {
+            background-color: #0d1117;
+            color: #e6edf3;
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #161b22;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .header {
+            padding: 20px;
+            background: rgba(0, 255, 65, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            color: #00FF41;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            margin-bottom: 15px;
+            border-left: 3px solid #00FF41;
+            overflow-x: auto;
+        }
+
+        .explanation {
+            background: rgba(18, 26, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .explanation strong { color: #d2a8ff; }
+
+        .footer {
+            padding: 15px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+        .dot.active { background: #00FF41; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>V.I.S.T.O</h1>
+            <p style="font-size: 12px; opacity: 0.6;">Guia Somático Mobile</p>
+        </div>
+        <div class="content">
+            <div class="nav-dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="code-block">
+                <span style="color: #ff7b72;">let</span> video;
+            </div>
+            <div class="explanation">
+                <strong>video</strong>: No celular, isso acessará sua câmera frontal. O navegador pedirá permissão ao carregar.
+            </div>
+
+            <div class="code-block">
+                <span style="color: #d2a8ff;">createCanvas</span>(windowWidth, windowHeight);
+            </div>
+            <div class="explanation">
+                Ajusta o "palco" para o tamanho exato da tela do seu smartphone (vertical ou horizontal).
+            </div>
+        </div>
+        <div class="footer">
+            V.I.S.T.O | Ocupações Videocoreográficas
+        </div>
+    </div>
+</body>
+</html>
