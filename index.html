@@ -1,0 +1,231 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap');
+
+  .cc { background:#0d1117; border-radius:12px; padding:0; overflow:visible; position:relative; font-family:'JetBrains Mono',monospace; }
+  .ch { display:flex; align-items:center; gap:8px; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,0.07); }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .dr { background:#ff5f57; } .dy { background:#febc2e; } .dg { background:#28c840; }
+  .fl { margin-left:8px; font-size:11px; color:rgba(255,255,255,0.3); font-family:'DM Sans',sans-serif; letter-spacing:.04em; }
+  .cb { padding:12px 0; position:relative; }
+  .cl { display:flex; align-items:flex-start; padding:3px 20px 3px 0; position:relative; cursor:default; transition:background .15s; min-height:24px; }
+  .cl:hover { background:rgba(255,255,255,0.04); }
+  .ln { width:46px; text-align:right; padding-right:18px; font-size:11.5px; color:rgba(255,255,255,0.18); user-select:none; flex-shrink:0; padding-top:1px; }
+  .lc { font-size:12.5px; line-height:1.65; white-space:pre; color:#e6edf3; }
+  .kw { color:#ff7b72; } .fn { color:#d2a8ff; } .nm { color:#79c0ff; }
+  .cm { color:#8b949e; font-style:italic; } .bi { color:#ffa657; } .st { color:#a5d6ff; }
+
+  .tg {
+    display:none; position:absolute; left:54px; top:28px; z-index:200;
+    width:290px;
+    background:rgba(18,26,42,0.88);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(0,255,65,0.18);
+    border-radius:10px; padding:12px 14px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.5), inset 0 0 0 0.5px rgba(255,255,255,0.06);
+    pointer-events:none;
+  }
+  .tg::before {
+    content:''; position:absolute; top:-6px; left:16px;
+    width:10px; height:10px;
+    background:rgba(18,26,42,0.88);
+    border-left:1px solid rgba(0,255,65,0.18);
+    border-top:1px solid rgba(0,255,65,0.18);
+    transform:rotate(45deg);
+  }
+  .cl:hover .tg { display:block; }
+  .tl { font-size:10px; font-family:'DM Sans',sans-serif; color:rgba(0,255,65,0.7); letter-spacing:.08em; text-transform:uppercase; margin-bottom:5px; }
+  .tt { font-size:12.5px; font-family:'DM Sans',sans-serif; color:rgba(220,232,240,0.92); line-height:1.55; }
+  .tt strong { color:#d2a8ff; }
+  .tt em { color:#ffa657; font-style:normal; }
+
+  .sl { font-family:'DM Sans',sans-serif; font-size:10.5px; color:rgba(0,255,65,0.4); padding:14px 20px 4px 64px; letter-spacing:.08em; text-transform:uppercase; border-top:1px solid rgba(255,255,255,0.04); margin-top:4px; }
+  .sl:first-child { border-top:none; margin-top:0; }
+
+  .hb { display:flex; align-items:center; gap:6px; padding:10px 20px; border-top:1px solid rgba(255,255,255,0.05); font-family:'DM Sans',sans-serif; font-size:11px; color:rgba(255,255,255,0.25); }
+  .hi { width:14px; height:14px; border-radius:50%; border:1px solid rgba(0,255,65,0.3); display:flex; align-items:center; justify-content:center; font-size:9px; color:rgba(0,255,65,0.5); flex-shrink:0; }
+</style>
+
+<div class="cc">
+  <div class="ch">
+    <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+    <span class="fl">sketch.js — V.I.S.T.O | introdução openprocessing</span>
+  </div>
+  <div class="cb">
+
+    <div class="sl">carregamento do modelo</div>
+
+    <div class="cl"><span class="ln">1</span><span class="lc"><span class="kw">let</span> video;</span>
+      <div class="tg"><div class="tl">linha 1</div><div class="tt">Declara a variável <strong>video</strong> — ela vai guardar a captura da sua câmera. Por enquanto está vazia; será preenchida dentro de <em>setup()</em>.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">2</span><span class="lc"><span class="kw">let</span> bodyPose;</span>
+      <div class="tg"><div class="tl">linha 2</div><div class="tt">Declara a variável <strong>bodyPose</strong> — ela vai guardar o modelo de inteligência artificial que detecta o corpo humano.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">3</span><span class="lc"><span class="kw">let</span> poses = [];</span>
+      <div class="tg"><div class="tl">linha 3</div><div class="tt">Cria uma lista vazia chamada <strong>poses</strong>. Cada vez que a IA detectar um corpo, ela vai guardar os dados aqui — posição das mãos, cotovelos, etc.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">5</span><span class="lc"><span class="kw">function</span> <span class="fn">preload</span>() {</span>
+      <div class="tg"><div class="tl">linha 5</div><div class="tt"><strong>preload()</strong> roda antes de tudo. É o momento de carregar arquivos pesados — como modelos de IA — antes que o programa comece de verdade.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">6</span><span class="lc">  <span class="cm">// Carrega o modelo ml5 bodyPose</span></span>
+      <div class="tg"><div class="tl">linha 6</div><div class="tt">Linhas com <em>//</em> são comentários — o computador ignora esse texto. Servem para você anotar o que está acontecendo no código.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">7</span><span class="lc">  bodyPose = <span class="bi">ml5</span>.<span class="fn">bodyPose</span>();</span>
+      <div class="tg"><div class="tl">linha 7</div><div class="tt">Ativa o modelo de IA <strong>ml5.bodyPose()</strong> e guarda na variável <em>bodyPose</em>. A partir daqui, o programa consegue "enxergar" e mapear o corpo humano.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">8</span><span class="lc">}</span>
+      <div class="tg"><div class="tl">linha 8</div><div class="tt">Fecha o bloco <strong>preload()</strong>. Tudo entre <em>{</em> e <em>}</em> pertence a essa função.</div></div>
+    </div>
+
+    <div class="sl">configuração da tela e câmera</div>
+
+    <div class="cl"><span class="ln">10</span><span class="lc"><span class="kw">function</span> <span class="fn">setup</span>() {</span>
+      <div class="tg"><div class="tl">linha 10</div><div class="tt"><strong>setup()</strong> roda uma única vez quando o programa inicia. É aqui que você monta o "palco" — tela, câmera e configurações iniciais.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">11</span><span class="lc">  <span class="fn">createCanvas</span>(<span class="bi">windowWidth</span>, <span class="bi">windowHeight</span>);</span>
+      <div class="tg"><div class="tl">linha 11</div><div class="tt"><strong>createCanvas()</strong> cria a área de desenho. Aqui usamos <em>windowWidth</em> e <em>windowHeight</em> — valores automáticos que preenchem a tela inteira do navegador.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">14</span><span class="lc">  video = <span class="fn">createCapture</span>(<span class="bi">VIDEO</span>);</span>
+      <div class="tg"><div class="tl">linha 14</div><div class="tt"><strong>createCapture(VIDEO)</strong> acessa a câmera do seu computador e começa a capturar o vídeo em tempo real. O navegador vai pedir permissão.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">15</span><span class="lc">  video.<span class="fn">size</span>(<span class="nm">780</span>, <span class="nm">640</span>);</span>
+      <div class="tg"><div class="tl">linha 15</div><div class="tt">Define o tamanho da captura de vídeo em pixels — 780 de largura por 640 de altura. Isso afeta a qualidade e a área de detecção da IA.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">16</span><span class="lc">  video.<span class="fn">hide</span>();</span>
+      <div class="tg"><div class="tl">linha 16</div><div class="tt"><strong>hide()</strong> esconde o elemento de vídeo padrão do HTML. Vamos exibir o vídeo do nosso jeito, dentro do canvas, e não como um player comum.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">18</span><span class="lc">  bodyPose.<span class="fn">detectStart</span>(video, gotPoses);</span>
+      <div class="tg"><div class="tl">linha 18</div><div class="tt">Inicia a detecção contínua: a IA vai analisar cada frame do <em>video</em> e, ao encontrar um corpo, chamar automaticamente a função <strong>gotPoses</strong> com os resultados.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">20</span><span class="lc">  <span class="fn">background</span>(<span class="nm">0</span>);</span>
+      <div class="tg"><div class="tl">linha 20</div><div class="tt"><strong>background(0)</strong> preenche a tela de preto no início. O <em>0</em> equivale ao preto puro — é o "blackout" antes do programa começar a desenhar.</div></div>
+    </div>
+
+    <div class="sl">recebendo os dados da IA</div>
+
+    <div class="cl"><span class="ln">23</span><span class="lc"><span class="kw">function</span> <span class="fn">gotPoses</span>(results) {</span>
+      <div class="tg"><div class="tl">linha 23</div><div class="tt"><strong>gotPoses()</strong> é chamada automaticamente pela IA sempre que detecta um corpo. O parâmetro <em>results</em> chega com todos os dados — coordenadas, confiança, etc.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">24</span><span class="lc">  poses = results;</span>
+      <div class="tg"><div class="tl">linha 24</div><div class="tt">Salva os resultados recebidos na variável <strong>poses</strong>, que foi criada lá no início. Assim o restante do programa consegue acessar a posição do corpo.</div></div>
+    </div>
+
+    <div class="sl">loop de animação — o que é desenhado a cada frame</div>
+
+    <div class="cl"><span class="ln">28</span><span class="lc">  <span class="fn">fill</span>(<span class="nm">0</span>, <span class="nm">2</span>);</span>
+      <div class="tg"><div class="tl">linha 28</div><div class="tt"><strong>fill(0, 2)</strong> preenche com preto quase transparente — o segundo número é a opacidade (de 0 a 255). O valor 2 cria o efeito de rastro: o desenho desaparece lentamente.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">29</span><span class="lc">  <span class="fn">rect</span>(<span class="nm">0</span>, <span class="nm">0</span>, <span class="bi">width</span>, <span class="bi">height</span>);</span>
+      <div class="tg"><div class="tl">linha 29</div><div class="tt">Desenha um retângulo que cobre a tela inteira com aquela cor preta semitransparente. Repetido 60 vezes por segundo, apaga o passado aos poucos — criando a memória do traço.</div></div>
+    </div>
+
+    <div class="sl">monitor de retorno — câmera no canto da tela</div>
+
+    <div class="cl"><span class="ln">32</span><span class="lc">  <span class="fn">push</span>();</span>
+      <div class="tg"><div class="tl">linha 32</div><div class="tt"><strong>push()</strong> salva o estado atual do desenho — cores, posição, transformações. Tudo que vier depois pode ser alterado sem afetar o resto do código.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">33</span><span class="lc">  <span class="kw">let</span> monitorW = <span class="nm">600</span>;</span>
+      <div class="tg"><div class="tl">linha 33</div><div class="tt">Cria a variável <strong>monitorW</strong> com o valor 600 — a largura em pixels do monitor de retorno (a janelinha com a câmera no canto da tela).</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">37</span><span class="lc">  <span class="fn">translate</span>(<span class="bi">width</span> - monitorW - <span class="nm">20</span>, <span class="nm">20</span>);</span>
+      <div class="tg"><div class="tl">linha 37</div><div class="tt"><strong>translate()</strong> move a origem do desenho para o canto superior direito da tela. A partir daqui, tudo será desenhado em relação a essa nova posição.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">40</span><span class="lc">  <span class="fn">tint</span>(<span class="nm">200</span>, <span class="nm">230</span>);</span>
+      <div class="tg"><div class="tl">linha 40</div><div class="tt"><strong>tint()</strong> aplica uma tonalidade sobre a imagem. Aqui: cinza (200) com opacidade 230 — cria o efeito de vidro fumê característico do glassmorphism do V.I.S.T.O.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">45</span><span class="lc">  <span class="fn">image</span>(video, <span class="nm">0</span>, <span class="nm">0</span>, monitorW, monitorH);</span>
+      <div class="tg"><div class="tl">linha 45</div><div class="tt"><strong>image()</strong> desenha o vídeo da câmera no canvas. Os parâmetros são: qual imagem, posição x, posição y, largura e altura. Aqui o vídeo é exibido sem espelhar — sua mão direita aparece à direita.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">49</span><span class="lc">  <span class="fn">stroke</span>(<span class="nm">0</span>, <span class="nm">255</span>, <span class="nm">65</span>, <span class="nm">150</span>);</span>
+      <div class="tg"><div class="tl">linha 49</div><div class="tt"><strong>stroke()</strong> define a cor da borda. Os 4 números são: vermelho, verde, azul e opacidade. Aqui: verde neon V.I.S.T.O com 150 de transparência — a moldura da câmera.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">51</span><span class="lc">  <span class="fn">rect</span>(<span class="nm">0</span>, <span class="nm">0</span>, monitorW, monitorH, <span class="nm">10</span>);</span>
+      <div class="tg"><div class="tl">linha 51</div><div class="tt">Desenha a moldura do monitor. O último número — <em>10</em> — arredonda os cantos do retângulo em 10 pixels, dando o acabamento visual da identidade V.I.S.T.O.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">52</span><span class="lc">  <span class="fn">pop</span>();</span>
+      <div class="tg"><div class="tl">linha 52</div><div class="tt"><strong>pop()</strong> restaura tudo que foi salvo pelo <em>push()</em>. As transformações e cores aplicadas ao monitor não vão contaminar o resto do desenho.</div></div>
+    </div>
+
+    <div class="sl">pincel somático — rastreamento da mão</div>
+
+    <div class="cl"><span class="ln">55</span><span class="lc">  <span class="kw">if</span> (poses.<span class="bi">length</span> > <span class="nm">0</span>) {</span>
+      <div class="tg"><div class="tl">linha 55</div><div class="tt">Verifica se a IA detectou pelo menos um corpo. <em>poses.length</em> é o número de pessoas encontradas. Só continua se houver alguém na câmera.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">57</span><span class="lc">    <span class="kw">let</span> rightWrist = pose.<span class="bi">right_wrist</span>;</span>
+      <div class="tg"><div class="tl">linha 57</div><div class="tt">Extrai da pose detectada as coordenadas do <strong>pulso direito</strong>. A IA retorna pontos específicos do corpo — cada um com posição x, y e nível de confiança da detecção.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">58</span><span class="lc">    <span class="kw">if</span> (rightWrist && rightWrist.<span class="bi">confidence</span> > <span class="nm">0.2</span>) {</span>
+      <div class="tg"><div class="tl">linha 58</div><div class="tt">Dupla verificação: o pulso foi encontrado (<em>rightWrist</em> existe) E a IA tem pelo menos 20% de certeza (<em>confidence > 0.2</em>). Evita desenhar em posições erradas ou instáveis.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">61</span><span class="lc">      <span class="kw">let</span> x = <span class="fn">map</span>(rightWrist.x, <span class="nm">0</span>, <span class="nm">640</span>, <span class="nm">0</span>, <span class="bi">width</span>);</span>
+      <div class="tg"><div class="tl">linha 61</div><div class="tt"><strong>map()</strong> traduz escalas diferentes. O vídeo tem 640px de largura, mas a tela pode ser maior. Essa linha converte a posição x do pulso para o tamanho real da tela.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">62</span><span class="lc">      <span class="kw">let</span> y = <span class="fn">map</span>(rightWrist.y, <span class="nm">0</span>, <span class="nm">480</span>, <span class="nm">0</span>, <span class="bi">height</span>);</span>
+      <div class="tg"><div class="tl">linha 62</div><div class="tt">O mesmo para o eixo vertical: converte y do vídeo (480px) para a altura real da tela. Assim o círculo acompanha exatamente o movimento do seu pulso.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">65</span><span class="lc">      drawingContext.<span class="bi">shadowBlur</span> = <span class="nm">25</span>;</span>
+      <div class="tg"><div class="tl">linha 65</div><div class="tt"><strong>shadowBlur</strong> ativa o efeito de brilho ao redor das formas desenhadas. O valor 25 define a intensidade do neon — quanto maior, mais difuso e luminoso.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">66</span><span class="lc">      drawingContext.<span class="bi">shadowColor</span> = <span class="fn">color</span>(<span class="nm">0</span>, <span class="nm">255</span>, <span class="nm">65</span>);</span>
+      <div class="tg"><div class="tl">linha 66</div><div class="tt">Define a cor do brilho neon como verde V.I.S.T.O — RGB (0, 255, 65). É a mesma cor usada na moldura do monitor, criando coerência visual no projeto.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">70</span><span class="lc">      <span class="fn">circle</span>(x, y, <span class="nm">20</span>);</span>
+      <div class="tg"><div class="tl">linha 70</div><div class="tt">Desenha o círculo — o "cursor somático" — na posição exata do seu pulso. Os parâmetros são: posição x, posição y e diâmetro (20px). Este ponto é o seu pincel corporal.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">72</span><span class="lc">      drawingContext.<span class="bi">shadowBlur</span> = <span class="nm">0</span>;</span>
+      <div class="tg"><div class="tl">linha 72</div><div class="tt">Desliga o efeito neon após desenhar o círculo. Importante: sem isso, todos os elementos desenhados depois também teriam o brilho — inclusive os que não devem ter.</div></div>
+    </div>
+
+    <div class="sl">redimensionamento da janela</div>
+
+    <div class="cl"><span class="ln">77</span><span class="lc"><span class="kw">function</span> <span class="fn">windowResized</span>() {</span>
+      <div class="tg"><div class="tl">linha 77</div><div class="tt"><strong>windowResized()</strong> é chamada automaticamente quando o usuário muda o tamanho da janela do navegador. Permite que o canvas se adapte sem quebrar.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">78</span><span class="lc">  <span class="fn">resizeCanvas</span>(<span class="bi">windowWidth</span>, <span class="bi">windowHeight</span>);</span>
+      <div class="tg"><div class="tl">linha 78</div><div class="tt"><strong>resizeCanvas()</strong> ajusta o tamanho do canvas para as novas dimensões da janela. Sem isso, o canvas ficaria com o tamanho antigo e o desenho quebraria.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">79</span><span class="lc">  <span class="fn">background</span>(<span class="nm">0</span>);</span>
+      <div class="tg"><div class="tl">linha 79</div><div class="tt">Após redimensionar, preenche tudo de preto novamente — um novo blackout. Evita que fragmentos do desenho anterior apareçam distorcidos no novo tamanho de tela.</div></div>
+    </div>
+
+    <div class="cl"><span class="ln">80</span><span class="lc">}</span>
+      <div class="tg"><div class="tl">linha 80</div><div class="tt">Fecha a função <strong>windowResized()</strong>. O programa está completo — câmera, IA, rastro e pincel somático funcionando juntos.</div></div>
+    </div>
+
+  </div>
+  <div class="hb">
+    <div class="hi">i</div>
+    passe o cursor sobre qualquer linha para ver sua explicação
+  </div>
+</div>
